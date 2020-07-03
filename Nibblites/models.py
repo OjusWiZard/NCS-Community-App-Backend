@@ -4,7 +4,7 @@ class Year(models.Model):
     year = models.PositiveSmallIntegerField()
 
     def __str__(self):
-        return self.year
+        return str(self.year)
 
 
 class Designation(models.Model):
@@ -26,7 +26,10 @@ class Session(models.Model):
     session_ending_year = models.PositiveSmallIntegerField()
 
     def __str__(self):
-        return self.session_starting_year + ' - ' + self.session_ending_year
+        return str(self.session_starting_year) + ' - ' + str(self.session_ending_year)
+
+
+# Branch
 
 
 class User_links(models.Model):
@@ -36,16 +39,13 @@ class User_links(models.Model):
     codechef = models.URLField()
     codeforces = models.URLField()
     hackerrank = models.URLField()
-    slack = models.URLField()
-    behance = models.URLField()
-
-    def __str__(self):
-        return self.user.full_name
 
 
 class User(models.Model):
     username = models.CharField(max_length=32)
     full_name = models.CharField(max_length=32)
+    #Adminssion_no
+    #University_roll_no
     phone_no = models.CharField(max_length=16)
     year = models.ForeignKey(Year,on_delete=models.CASCADE)
     session = models.ForeignKey(Session,on_delete=models.CASCADE)

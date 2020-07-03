@@ -21,5 +21,5 @@ routers = routers.DefaultRouter()
 routers.register(r'users', UserViewSet)
 
 urlpatterns = [
-    path('users/', include(routers.urls)),
+    path('', include(routers.urls)),
 ]
