@@ -46,7 +46,6 @@ class User_links(models.Model):
 class User(models.Model):
     username = models.CharField(max_length=32)
     full_name = models.CharField(max_length=32)
-    password = models.CharField(max_length=32)
     phone_no = models.CharField(max_length=16)
     year = models.ForeignKey(Year,on_delete=models.CASCADE)
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
