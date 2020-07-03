@@ -50,7 +50,7 @@ class User(models.Model):
     year = models.ForeignKey(Year,on_delete=models.CASCADE)
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
     designation = models.ForeignKey(Designation,on_delete=models.CASCADE)
-    user_links = models.ForeignKey(User_links,on_delete=models.CASCADE)
+    user_links = models.OneToOneField(User_links,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.full_name
