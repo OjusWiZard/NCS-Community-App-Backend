@@ -1,7 +1,38 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Year, Session, Designation, User_links, Club
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+
+class YearSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Year
+        fields = "__all__"
+
+
+class DesignationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Designation
+        fields = "__all__"
+
+
+class ClubSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Club
+        fields = "__all__"
+
+
+class SessionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Session
+        fields = "__all__"
+
+
+class User_linksSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_links
+        fields = "__all__"
+
+
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['url','id','username','full_name','phone_no','year_id','session_id','designation_id','user_links_id']
+        fields = "__all__"
