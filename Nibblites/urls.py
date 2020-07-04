@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.urls import path, include
 from rest_framework import routers
-from .views import UserViewSet, YearViewSet, ClubViewSet, User_linksViewSet, SessionViewSet, DesignationViewSet
+from .views import UserViewSet, YearViewSet, ClubViewSet, User_linksViewSet, SessionViewSet, DesignationViewSet, BranchViewSet
 
 routers = routers.DefaultRouter()
 routers.register(r'users', UserViewSet)
 routers.register(r'years', YearViewSet)
 routers.register(r'clubs', ClubViewSet)
+routers.register(r'branch', BranchViewSet)
 routers.register(r'sessions', SessionViewSet)
 routers.register(r'designations', DesignationViewSet)
 routers.register(r'user_linkss', User_linksViewSet)

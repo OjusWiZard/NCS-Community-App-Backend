@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Year, Session, Designation, User_links, Club
+from .models import User, Year, Session, Designation, User_links, Club, Branch
 
 
 class YearSerializer(serializers.ModelSerializer):
@@ -35,4 +35,10 @@ class User_linksSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        fields = "__all__"
+
+
+class BranchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Branch
         fields = "__all__"

@@ -1,6 +1,11 @@
-from .models import User, Year, Session, Club, Designation, User_links
+from .models import User, Year, Session, Club, Designation, User_links, Branch
 from rest_framework import viewsets
-from .serializers import UserSerializer, YearSerializer, SessionSerializer, DesignationSerializer, User_linksSerializer, ClubSerializer
+from .serializers import UserSerializer, YearSerializer, SessionSerializer, DesignationSerializer, User_linksSerializer, ClubSerializer, BranchSerializer
+
+
+class BranchViewSet(viewsets.ModelViewSet):
+    queryset = Branch.objects.all().order_by('id')
+    serializer_class = BranchSerializer
 
 
 class YearViewSet(viewsets.ModelViewSet):
@@ -29,5 +34,5 @@ class ClubViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('-designation_id')
+    queryset = User.objects.all().order_by('designation_id')
     serializer_class = UserSerializer
