@@ -29,14 +29,19 @@ class Session(models.Model):
         return str(self.session_starting_year) + ' - ' + str(self.session_ending_year)
 
 
-# Branch
+class Branch(models.Model):
+    branch_code = models.CharField(max_length=8)
+    branch_full_form = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.branch_code
 
 
 class User_links(models.Model):
     email = models.EmailField()
     linkedin = models.URLField()
     github = models.URLField()
-    codechef = models.URLField(null=True)
+    codechef = models.URLField(null=True,)
     codeforces = models.URLField(null=True)
     hackerrank = models.URLField(null=True)
     hackerearth = models.URLField(null=True)
@@ -57,6 +62,7 @@ class User(models.Model):
     adminssion_no = models.CharField(max_length=8)
     university_roll_no = models.CharField(max_length=16)
     phone_no = models.CharField(max_length=16)
+    branch = models.ForeignKey(Branch,on_delete=models.CASCADE)
     year = models.ForeignKey(Year,on_delete=models.CASCADE)
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
     designation = models.ForeignKey(Designation,on_delete=models.CASCADE)
