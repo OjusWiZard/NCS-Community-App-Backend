@@ -39,18 +39,18 @@ class Branch(models.Model):
 
 class User_links(models.Model):
     email = models.EmailField()
-    linkedin = models.URLField()
-    github = models.URLField()
-    codechef = models.URLField(null=True,)
-    codeforces = models.URLField(null=True)
-    hackerrank = models.URLField(null=True)
-    hackerearth = models.URLField(null=True)
-    topcoder = models.URLField(null=True)
-    codewars = models.URLField(null=True)
-    leetcode = models.URLField(null=True)
-    spoj = models.URLField(null=True)
-    codeingame = models.URLField(null=True)
-    behance = models.URLField(null=True)
+    linkedin = models.URLField(null=True,blank=True)
+    github = models.URLField(null=True,blank=True)
+    codechef = models.URLField(null=True,blank=True)
+    codeforces = models.URLField(null=True,blank=True)
+    hackerrank = models.URLField(null=True,blank=True)
+    hackerearth = models.URLField(null=True,blank=True)
+    topcoder = models.URLField(null=True,blank=True)
+    codewars = models.URLField(null=True,blank=True)
+    leetcode = models.URLField(null=True,blank=True)
+    spoj = models.URLField(null=True,blank=True)
+    codeingame = models.URLField(null=True,blank=True)
+    behance = models.URLField(null=True,blank=True)
 
     def __str__(self):
         return self.email
