@@ -1,3 +1,4 @@
+.env
 NCSApp/__pycache__/
 Nibblites/__pycache__/
 Nibblites/migrations/__pycache__/
