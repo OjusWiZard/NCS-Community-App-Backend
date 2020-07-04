@@ -36,16 +36,26 @@ class User_links(models.Model):
     email = models.EmailField()
     linkedin = models.URLField()
     github = models.URLField()
-    codechef = models.URLField()
-    codeforces = models.URLField()
-    hackerrank = models.URLField()
+    codechef = models.URLField(null=True)
+    codeforces = models.URLField(null=True)
+    hackerrank = models.URLField(null=True)
+    hackerearth = models.URLField(null=True)
+    topcoder = models.URLField(null=True)
+    codewars = models.URLField(null=True)
+    leetcode = models.URLField(null=True)
+    spoj = models.URLField(null=True)
+    codeingame = models.URLField(null=True)
+    behance = models.URLField(null=True)
+
+    def __str__(self):
+        return self.email
 
 
 class User(models.Model):
     username = models.CharField(max_length=32)
     full_name = models.CharField(max_length=32)
-    #Adminssion_no
-    #University_roll_no
+    adminssion_no = models.CharField(max_length=8)
+    university_roll_no = models.CharField(max_length=16)
     phone_no = models.CharField(max_length=16)
     year = models.ForeignKey(Year,on_delete=models.CASCADE)
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
