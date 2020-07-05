@@ -1,41 +1,48 @@
 from rest_framework import serializers
 from .models import User, Year, Session, Designation, User_links, Club, Branch
+from collections import OrderedDict
+from operator import itemgetter
 
 
 class YearSerializer(serializers.ModelSerializer):
     class Meta:
         model = Year
-        fields = "__all__"
+        fields = ['year']
 
 
 class DesignationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Designation
-        fields = "__all__"
+        exclude = ['id']
 
 
 class ClubSerializer(serializers.ModelSerializer):
     class Meta:
         model = Club
-        fields = "__all__"
+        fields = ['club']
 
 
 class SessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Session
-        fields = "__all__"
+        exclude = ['id']
 
 
 class User_linksSerializer(serializers.ModelSerializer):
     class Meta:
         model = User_links
-        fields = "__all__"
+        exclude = ['id']
+
+    def to_representation(self, instance):
+            excludeNullFields = super().to_representation(instance)
+            excludeNullFields = OrderedDict(filter(itemgetter(1), excludeNullFields.items()))
+            return excludeNullFields
 
 
 class BranchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Branch
-        fields = "__all__"
+        exclude = ['id']
 
 
 class UserSerializer(serializers.ModelSerializer):
