@@ -8,6 +8,7 @@ class Year(models.Model):
 
 
 class Designation(models.Model):
+    rank = models.PositiveSmallIntegerField(null=True)
     designation = models.CharField(max_length=32,unique=True)
 
     def __str__(self):
