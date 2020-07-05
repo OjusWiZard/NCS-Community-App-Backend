@@ -39,6 +39,7 @@ class BranchSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    user_links = User_linksSerializer()
     class Meta:
         model = User
-        fields = "__all__"
+        fields = ['full_name','year','designation','club','phone_no','user_links']

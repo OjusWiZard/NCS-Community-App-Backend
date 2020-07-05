@@ -39,6 +39,7 @@ class Branch(models.Model):
 
 class User_links(models.Model):
     email = models.EmailField()
+    portfolio = models.URLField(null=True,blank=True)
     linkedin = models.URLField(null=True,blank=True)
     github = models.URLField(null=True,blank=True)
     codechef = models.URLField(null=True,blank=True)
