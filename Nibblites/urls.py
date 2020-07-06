@@ -30,4 +30,4 @@ routers.register(r'user_linkss', User_linksViewSet)
 
 urlpatterns = [
     path('', include(routers.urls)),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
