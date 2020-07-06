@@ -49,4 +49,4 @@ class UserSerializer(serializers.ModelSerializer):
     user_links = User_linksSerializer()
     class Meta:
         model = User
-        fields = ['id','full_name','year','designation','club','phone_no','user_links']
+        fields = ['id','full_name','profile_pic','year','designation','club','phone_no','user_links']

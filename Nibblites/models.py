@@ -60,6 +60,7 @@ class User_links(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=32)
+    profile_pic = models.ImageField(upload_to='profile_pictures/',blank=True)
     full_name = models.CharField(max_length=32)
     adminssion_no = models.CharField(max_length=8)
     university_roll_no = models.CharField(max_length=16)

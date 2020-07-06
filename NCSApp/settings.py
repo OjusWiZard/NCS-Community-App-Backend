@@ -122,3 +122,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = "/home/Ojuswi/NCS-Community-App-Backend/static/"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = "/home/Ojuswi/NCS-Community-App-Backend/media/"
