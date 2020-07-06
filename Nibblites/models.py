@@ -70,6 +70,7 @@ class Website(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=32)
+    email = models.EmailField(unique=True)
     profile_pic = models.ImageField(upload_to='profile_pictures/',blank=True)
     full_name = models.CharField(max_length=32)
     adminssion_no = models.CharField(max_length=8)
@@ -81,7 +82,6 @@ class User(models.Model):
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
     designation = models.ForeignKey(Designation,on_delete=models.CASCADE,to_field='designation')
     user_links = models.OneToOneField(User_links,on_delete=models.CASCADE)
-    profile_links = models.ManyToManyField(Website,through='Profiles')
 
     def __str__(self):
         return self.full_name
@@ -89,7 +89,7 @@ class User(models.Model):
 
 class Profiles(models.Model):
     website = models.ForeignKey(Website,on_delete=models.CASCADE,to_field='website_name')
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='profiles')
     link = models.URLField()
 
     def __str__(self):

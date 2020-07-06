@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Year, Session, Designation, User_links, Club, Branch
+from .models import User, Year, Session, Designation, User_links, Club, Branch, Profiles
 from collections import OrderedDict
 from operator import itemgetter
 
@@ -45,8 +45,15 @@ class BranchSerializer(serializers.ModelSerializer):
         exclude = ['id']
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profiles
+        exclude = ['id','user']
+
+
 class UserSerializer(serializers.ModelSerializer):
     user_links = User_linksSerializer()
+    profiles = ProfileSerializer(many=True)
     class Meta:
         model = User
-        fields = ['id','full_name','profile_pic','year','designation','club','phone_no','user_links']
+        fields = ['full_name','profile_pic','email','year','designation','club','phone_no','user_links','profiles']
