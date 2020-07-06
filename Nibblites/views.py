@@ -1,10 +1,10 @@
-from .models import User, Year, Session, Club, Designation, User_links, Branch
+from .models import User, Year, Session, Club, Designation, User_links, Branch, Profiles
 from rest_framework import viewsets
-from .serializers import UserSerializer, YearSerializer, SessionSerializer, DesignationSerializer, User_linksSerializer, ClubSerializer, BranchSerializer
+from .serializers import UserSerializer, YearSerializer, SessionSerializer, DesignationSerializer, User_linksSerializer, ClubSerializer, BranchSerializer, ProfileSerializer
 
 
 class BranchViewSet(viewsets.ModelViewSet):
-    queryset = Branch.objects.all().order_by('id')
+    queryset = Branch.objects.all()
     serializer_class = BranchSerializer
 
 
@@ -19,17 +19,22 @@ class SessionViewSet(viewsets.ModelViewSet):
 
 
 class DesignationViewSet(viewsets.ModelViewSet):
-    queryset = Designation.objects.all().order_by('id')
+    queryset = Designation.objects.all()
     serializer_class = DesignationSerializer
 
 
 class User_linksViewSet(viewsets.ModelViewSet):
-    queryset = User_links.objects.all().order_by('id')
+    queryset = User_links.objects.all()
     serializer_class = User_linksSerializer
 
 
+class ProfilesViewSet(viewsets.ModelViewSet):
+    queryset = Profiles.objects.all()
+    serializer_class = ProfileSerializer
+
+
 class ClubViewSet(viewsets.ModelViewSet):
-    queryset = Club.objects.all().order_by('id')
+    queryset = Club.objects.all()
     serializer_class = ClubSerializer
 
 
