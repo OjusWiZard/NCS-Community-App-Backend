@@ -43,6 +43,7 @@ class User_links(models.Model):
     portfolio = models.URLField(null=True,blank=True)
     linkedin = models.URLField(null=True,blank=True)
     github = models.URLField(null=True,blank=True)
+    kaggle = models.URLField(null=True,blank=True)
     codechef = models.URLField(null=True,blank=True)
     codeforces = models.URLField(null=True,blank=True)
     hackerrank = models.URLField(null=True,blank=True)
@@ -53,6 +54,8 @@ class User_links(models.Model):
     spoj = models.URLField(null=True,blank=True)
     codeingame = models.URLField(null=True,blank=True)
     behance = models.URLField(null=True,blank=True)
+    medium = models.URLField(null=True,blank=True)
+    fossbyte = models.URLField(null=True,blank=True)
 
     def __str__(self):
         return self.email

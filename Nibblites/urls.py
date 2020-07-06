@@ -16,8 +16,6 @@ Including another URLconf
 from django.urls import path, include
 from rest_framework import routers
 from .views import UserViewSet, YearViewSet, ClubViewSet, User_linksViewSet, SessionViewSet, DesignationViewSet, BranchViewSet
-from django.conf import settings
-from django.conf.urls.static import static
 
 routers = routers.DefaultRouter()
 routers.register(r'users', UserViewSet)

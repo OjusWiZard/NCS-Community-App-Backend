@@ -34,5 +34,5 @@ class ClubViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('designation__rank')
+    queryset = User.objects.all().order_by('designation__rank','-year')
     serializer_class = UserSerializer
