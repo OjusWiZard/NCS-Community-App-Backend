@@ -61,6 +61,13 @@ class User_links(models.Model):
         return self.email
 
 
+class Website(models.Model):
+    website_name = models.CharField(max_length=32,unique=True)
+
+    def __str__(self):
+        return self.website_name
+
+
 class User(models.Model):
     username = models.CharField(max_length=32)
     profile_pic = models.ImageField(upload_to='profile_pictures/',blank=True)
@@ -74,6 +81,16 @@ class User(models.Model):
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
     designation = models.ForeignKey(Designation,on_delete=models.CASCADE,to_field='designation')
     user_links = models.OneToOneField(User_links,on_delete=models.CASCADE)
+    profile_links = models.ManyToManyField(Website,through='Profiles')
 
     def __str__(self):
         return self.full_name
+
+
+class Profiles(models.Model):
+    website = models.ForeignKey(Website,on_delete=models.CASCADE,to_field='website_name')
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    link = models.URLField()
+
+    def __str__(self):
+        return "'s ".join([str(self.user),str(self.website)])
