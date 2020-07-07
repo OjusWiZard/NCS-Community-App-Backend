@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'Accounts',
     'Nibblites'
 ]
 
@@ -73,6 +74,25 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'NCSApp.wsgi.application'
+
+
+# REST Framework Settings
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSIONS_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+
+# Djoser Settings
+
+DJOSER = {
+    'LOGIN_FIELD': 'email'
+}
 
 
 # Database
