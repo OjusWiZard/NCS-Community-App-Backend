@@ -38,29 +38,6 @@ class Branch(models.Model):
         return self.branch_code
 
 
-class User_links(models.Model):
-    email = models.EmailField()
-    portfolio = models.URLField(null=True,blank=True)
-    linkedin = models.URLField(null=True,blank=True)
-    github = models.URLField(null=True,blank=True)
-    kaggle = models.URLField(null=True,blank=True)
-    codechef = models.URLField(null=True,blank=True)
-    codeforces = models.URLField(null=True,blank=True)
-    hackerrank = models.URLField(null=True,blank=True)
-    hackerearth = models.URLField(null=True,blank=True)
-    topcoder = models.URLField(null=True,blank=True)
-    codewars = models.URLField(null=True,blank=True)
-    leetcode = models.URLField(null=True,blank=True)
-    spoj = models.URLField(null=True,blank=True)
-    codeingame = models.URLField(null=True,blank=True)
-    behance = models.URLField(null=True,blank=True)
-    medium = models.URLField(null=True,blank=True)
-    fossbyte = models.URLField(null=True,blank=True)
-
-    def __str__(self):
-        return self.email
-
-
 class Website(models.Model):
     website_name = models.CharField(max_length=32,unique=True)
 
@@ -81,7 +58,6 @@ class User(models.Model):
     year = models.ForeignKey(Year,on_delete=models.CASCADE,to_field='year')
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
     designation = models.ForeignKey(Designation,on_delete=models.CASCADE,to_field='designation')
-    user_links = models.OneToOneField(User_links,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.full_name
