@@ -67,7 +67,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     year = models.ForeignKey(Year,on_delete=models.CASCADE,to_field='year')
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
     designation = models.ForeignKey(Designation,on_delete=models.CASCADE,to_field='designation')
-    profiles = models.ManyToManyField(Website,through='Profile',null=True)
+    profile = models.ManyToManyField(Website,through='Profile')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username','full_name','phone_no','club','branch','year','session','designation']
@@ -80,7 +80,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
     website = models.ForeignKey(Website,on_delete=models.CASCADE,to_field='website_name')
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='profiles')
     link = models.URLField()
 
     def __str__(self):

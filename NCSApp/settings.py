@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
 
-    'Accounts'
+    'Accounts',
+    'Nibblites',
 ]
 
 MIDDLEWARE = [
