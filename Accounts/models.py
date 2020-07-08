@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-
 from .managers import UserManager
 
 
@@ -58,8 +57,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
 
-    username = models.CharField(max_length=32)
-    profile_pic = models.ImageField(upload_to='profile_pictures/',blank=True,null=True)
+    nickname = models.CharField(max_length=32)
+    profile_pic = models.ImageField(upload_to='profile_pictures/',null=True)
     full_name = models.CharField(max_length=32)
     phone_no = models.CharField(max_length=16)
     club = models.ForeignKey(Club,on_delete=models.CASCADE,to_field='club')
@@ -70,12 +69,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     profile = models.ManyToManyField(Website,through='Profile')
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username','full_name','phone_no','club','branch','year','session','designation']
+    REQUIRED_FIELDS = ['nickname','full_name','phone_no','club','branch','year','session','designation']
 
     objects = UserManager()
 
     def __str__(self):
-        return self.username
+        return self.nickname
 
 
 class Profile(models.Model):

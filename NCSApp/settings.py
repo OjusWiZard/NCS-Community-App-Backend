@@ -93,7 +93,8 @@ REST_FRAMEWORK = {
 # Djoser Settings
 
 DJOSER = {
-    'LOGIN_FIELD': 'email'
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True
 }
 
 
