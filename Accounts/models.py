@@ -51,6 +51,29 @@ class Website(models.Model):
         return self.website_name
 
 
+class User_links(models.Model):
+    email = models.EmailField()
+    portfolio = models.URLField(null=True,blank=True)
+    linkedin = models.URLField(null=True,blank=True)
+    github = models.URLField(null=True,blank=True)
+    kaggle = models.URLField(null=True,blank=True)
+    codechef = models.URLField(null=True,blank=True)
+    codeforces = models.URLField(null=True,blank=True)
+    hackerrank = models.URLField(null=True,blank=True)
+    hackerearth = models.URLField(null=True,blank=True)
+    topcoder = models.URLField(null=True,blank=True)
+    codewars = models.URLField(null=True,blank=True)
+    leetcode = models.URLField(null=True,blank=True)
+    spoj = models.URLField(null=True,blank=True)
+    codeingame = models.URLField(null=True,blank=True)
+    behance = models.URLField(null=True,blank=True)
+    medium = models.URLField(null=True,blank=True)
+    fossbyte = models.URLField(null=True,blank=True)
+
+    def __str__(self):
+        return self.email
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     is_staff = models.BooleanField(default=False)
@@ -67,6 +90,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
     designation = models.ForeignKey(Designation,on_delete=models.CASCADE,to_field='designation')
     profile = models.ManyToManyField(Website,through='Profile')
+    user_links = models.OneToOneField(User_links,on_delete=models.CASCADE,null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname','full_name','phone_no','club','branch','year','session','designation']
