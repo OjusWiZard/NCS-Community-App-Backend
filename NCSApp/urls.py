@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('Accounts/', include('Accounts.urls')),
     path('Nibblites/', include('Nibblites.urls')),
+    path('Projects/', include('Projects.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
