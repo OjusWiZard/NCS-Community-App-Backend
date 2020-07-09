@@ -1,10 +1,10 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import ProjectSerializer, ProjectSerializerForNow
+from .views import ProjectViewSet, ProjectViewSetForNow
 
 routers = routers.DefaultRouter()
-routers.register(r'List', ProjectSerializer)
-routers.register(r'list', ProjectSerializerForNow)
+routers.register(r'List', ProjectViewSet)
+routers.register(r'list', ProjectViewSetForNow)
 
 urlpatterns = [
     path('', include(routers.urls)),

@@ -6,11 +6,11 @@ from .serializers import ProjectSerializer
 
 
 @permission_classes([IsAuthenticated])
-class ProjectSerializer(viewsets.ModelViewSet):
-    queryset = ProjectSerializer.objects.all().order_by('started_year')
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all().order_by('started_year')
     serializer_class = ProjectSerializer
 
 
-class ProjectSerializerForNow(viewsets.ModelViewSet):
-    queryset = ProjectSerializer.objects.all().order_by('started_year')
+class ProjectViewSetForNow(viewsets.ModelViewSet):
+    queryset = Project.objects.all().order_by('started_year')
     serializer_class = ProjectSerializer
