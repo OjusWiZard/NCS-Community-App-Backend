@@ -14,3 +14,8 @@ class NibbliteViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('designation__rank','-year')
     serializer_class = UserSerializerForNow
+
+
+class UnsecureNibbliteViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('designation__rank','-year')
+    serializer_class = UserSerializer
