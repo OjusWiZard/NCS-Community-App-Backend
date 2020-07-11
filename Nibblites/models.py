@@ -29,7 +29,7 @@ class Language(models.Model):
 
 
 class TechStack(models.Model):
-    frontend_stack = models.ManyToManyField(Frontend,blank=True)
-    backend_stack = models.ManyToManyField(Backend,blank=True)
-    app_tech_stack = models.ManyToManyField(AppTech,blank=True)
+    frontend_techs = models.ManyToManyField(Frontend,blank=True)
+    backend_techs = models.ManyToManyField(Backend,blank=True)
+    app_techs = models.ManyToManyField(AppTech,blank=True)
     languages = models.ManyToManyField(Language,blank=True)
