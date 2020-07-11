@@ -4,6 +4,8 @@ from Accounts.models import User
 class Project(models.Model):
     project_name = models.CharField(max_length=64)
     project_description = models.CharField(max_length=1024)
+    icon = models.ImageField(upload_to='projects/icons/',null=True,blank=True)
+    background = models.ImageField(upload_to='projects/backgrounds/',null=True)
     current_status = models.TextField(max_length=64)
     github = models.URLField(blank=True,null=True)
     deployed_at = models.URLField(blank=True,null=True)
