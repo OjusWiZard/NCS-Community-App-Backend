@@ -4,6 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from .managers import UserManager
+from Nibblites.models import TechStack
 
 
 class Year(models.Model):
@@ -90,6 +91,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
     designation = models.ForeignKey(Designation,on_delete=models.CASCADE,to_field='designation')
     profile = models.ManyToManyField(Website,through='Profile')
+    techstack = models.ManyToManyField(TechStack,related_name='users')
     user_links = models.OneToOneField(User_links,on_delete=models.CASCADE,null=True)
 
     USERNAME_FIELD = 'email'
