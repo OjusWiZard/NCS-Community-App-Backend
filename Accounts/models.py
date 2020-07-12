@@ -8,7 +8,7 @@ from Nibblites.models import TechStack
 
 
 class Year(models.Model):
-    year = models.PositiveSmallIntegerField(unique=True)
+    year = models.CharField(max_length=8,unique=True)
 
     def __str__(self):
         return str(self.year)
@@ -91,7 +91,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
     designation = models.ForeignKey(Designation,on_delete=models.CASCADE,to_field='designation')
     profile = models.ManyToManyField(Website,through='Profile')
-    techstack = models.ManyToManyField(TechStack,related_name='users')
+    techstack = models.ManyToManyField(TechStack,related_name='users',blank=True)
     user_links = models.OneToOneField(User_links,on_delete=models.CASCADE,null=True)
 
     USERNAME_FIELD = 'email'
