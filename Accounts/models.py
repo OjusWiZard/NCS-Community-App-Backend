@@ -91,7 +91,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     session = models.ForeignKey(Session,on_delete=models.CASCADE)
     designation = models.ForeignKey(Designation,on_delete=models.CASCADE,to_field='designation')
     profile = models.ManyToManyField(Website,through='Profile')
-    techstack = models.ManyToManyField(TechStack,related_name='users',blank=True)
+    techstack = models.ForeignKey(TechStack,on_delete=models.SET_NULL,related_name='users',null=True,blank=True)
     user_links = models.OneToOneField(User_links,on_delete=models.CASCADE,null=True)
 
     USERNAME_FIELD = 'email'

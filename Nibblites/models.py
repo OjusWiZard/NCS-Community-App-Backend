@@ -33,3 +33,9 @@ class TechStack(models.Model):
     backend_techs = models.ManyToManyField(Backend,blank=True)
     app_techs = models.ManyToManyField(AppTech,blank=True)
     languages = models.ManyToManyField(Language,blank=True)
+
+    def __str__(self):
+        if self.users:
+            return str(self.users.get(id=1)) + "'s TechStack"
+        else:
+            return str(self.projects.get(id=1)) + "'s TechStack"
