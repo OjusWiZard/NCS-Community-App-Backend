@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'Accounts',
     'Nibblites',
     'Projects',
+    'Attendance'
 ]
 
 MIDDLEWARE = [
