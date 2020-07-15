@@ -1,5 +1,6 @@
 from django.db import models
 from Accounts.models import User
+from django.utils import timezone
 
 
 class Venue(models.Model):
@@ -10,7 +11,9 @@ class Venue(models.Model):
 
 
 class Lab(models.Model):
-    date_time = models.DateTimeField(auto_now=True)
+    start_datetime = models.DateTimeField()
+    attendance_offset = models.DurationField(default=timezone.timedelta(minutes=5))
+    duration = models.DurationField(default=timezone.timedelta(hours=2))
     topic = models.CharField(max_length=64)
     additional_info = models.TextField(max_length=512,null=True,blank=True)
     venue = models.ForeignKey(Venue,on_delete=models.SET_NULL,null=True)
