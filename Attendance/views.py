@@ -16,7 +16,7 @@ class markAttendance(viewsets.ViewSet):
         if not Lab.objects.filter(venue=lab_id).last():
             # No lab exist on this venue
             return HttpResponse(status=404)
-        
+
         else:
             latest_lab = Lab.objects.filter(venue=lab_id).last()
             lab_starting = latest_lab.start_datetime - latest_lab.attendance_offset
@@ -33,7 +33,7 @@ class markAttendance(viewsets.ViewSet):
                     # Have a nice Lab!
                     Attendance.objects.create(attendee=request.user,lab=latest_lab,time_entered=current_time)
                     return HttpResponse(status=201)
-            
+
             else:
                 # You're either too early or too late
                 return HttpResponse(status=410)
