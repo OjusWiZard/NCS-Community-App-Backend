@@ -1,8 +1,12 @@
 from rest_framework import serializers
-from Accounts.models import User, Profile
+from Accounts.models import User, Profile, Session
 from Projects.serializers import TechStackSerializer
-from collections import OrderedDict
-from operator import itemgetter
+
+
+class SessionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Session
+        exclude = ['id']
 
 
 class ProfileSerializer(serializers.ModelSerializer):
