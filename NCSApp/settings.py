@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'fcm_django',
 
     'Accounts',
     'Nibblites',
@@ -102,6 +103,13 @@ DJOSER = {
     }
 }
 
+
+# FCM-Django Settings
+
+FCM_DJANGO_SETTINGS = {
+        "FCM_SERVER_KEY": config('FirebaseKey'),
+        "DELETE_INACTIVE_DEVICES": True,
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
