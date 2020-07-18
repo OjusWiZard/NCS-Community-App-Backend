@@ -69,7 +69,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     designation = models.ForeignKey(Designation,on_delete=models.CASCADE,to_field='designation')
     profile = models.ManyToManyField(Website,through='Profile')
     techstack = models.ForeignKey(TechStack,on_delete=models.SET_NULL,related_name='users',null=True,blank=True)
-    firebase_token = models.CharField(max_length=512,null=True,blank=True,unique=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname','full_name','phone_no','club','branch','year','session','designation']

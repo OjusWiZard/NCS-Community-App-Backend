@@ -108,7 +108,6 @@ DJOSER = {
 
 FCM_DJANGO_SETTINGS = {
         "FCM_SERVER_KEY": config('FirebaseKey'),
-        "DELETE_INACTIVE_DEVICES": True,
 }
 
 # Database

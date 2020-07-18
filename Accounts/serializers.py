@@ -10,4 +10,4 @@ class CurrentuserSerializer(serializers.ModelSerializer):
     session = SessionSerializer()
     class Meta:
         model = User
-        fields = ['nickname','full_name','profile_pic','email','year','session','designation','club','phone_no','techstack','profiles','firebase_token']
+        fields = ['nickname','full_name','profile_pic','email','year','session','designation','club','phone_no','techstack','profiles']
