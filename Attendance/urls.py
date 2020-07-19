@@ -1,10 +1,14 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import markAttendance
+from .views import markAttendance, Schedule
 
-routers = routers.DefaultRouter()
-routers.register(r'', markAttendance, basename='attend')
+attendanceRouter = routers.DefaultRouter()
+attendanceRouter.register(r'', markAttendance, basename='attend')
+
+scheduleRouter = routers.DefaultRouter()
+scheduleRouter.register(r'Schedule', Schedule, basename='schedule')
 
 urlpatterns = [
-    path('<int:lab_id>/', include(routers.urls)),
+    path('<int:lab_id>/', include(attendanceRouter.urls)),
+    path('', include(scheduleRouter.urls)),
 ]

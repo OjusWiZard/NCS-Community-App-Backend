@@ -5,6 +5,13 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.utils import timezone
 from .models import Lab, Attendance, Venue
+from .serializers import ScheduleSerializer
+
+@permission_classes([IsAuthenticated])
+class Schedule(viewsets.ModelViewSet):
+    queryset = Lab.objects.filter(start_datetime__gte=timezone.now()).order_by('start_datetime')
+    print(timezone.now())
+    serializer_class = ScheduleSerializer
 
 
 @permission_classes([IsAuthenticated])
