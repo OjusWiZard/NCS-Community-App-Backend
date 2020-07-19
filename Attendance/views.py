@@ -4,13 +4,13 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.utils import timezone
+from django.db.models import F
 from .models import Lab, Attendance, Venue
 from .serializers import ScheduleSerializer
 
 @permission_classes([IsAuthenticated])
 class Schedule(viewsets.ModelViewSet):
-    queryset = Lab.objects.filter(start_datetime__gte=timezone.now()).order_by('start_datetime')
-    print(timezone.now())
+    queryset = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')).order_by(F('start_datetime')+F('duration'))
     serializer_class = ScheduleSerializer
 
 
