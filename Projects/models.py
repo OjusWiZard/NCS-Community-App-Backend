@@ -14,7 +14,7 @@ class Project(models.Model):
     last_modified = models.PositiveSmallIntegerField(blank=True,null=True)
     scope = models.TextField(max_length=1024,blank=True,null=True)
     team = models.ManyToManyField(User,related_name='projects',blank=True)
-    techstack = models.ForeignKey(TechStack,on_delete=models.SET_NULL,null=True,related_name='projects')
+    techstack = models.ForeignKey(TechStack,on_delete=models.DO_NOTHING,related_name='projects')
 
     def __str__(self):
         return self.project_name

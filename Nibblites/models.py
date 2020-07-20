@@ -32,7 +32,7 @@ class TechStack(models.Model):
     frontend_techs = models.ManyToManyField(Frontend,blank=True)
     backend_techs = models.ManyToManyField(Backend,blank=True)
     app_techs = models.ManyToManyField(AppTech,blank=True)
-    languages = models.ManyToManyField(Language,blank=True)
+    languages = models.ManyToManyField(Language)
 
     def __str__(self):
         if self.users.all().first():
