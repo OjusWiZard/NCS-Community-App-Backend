@@ -35,7 +35,7 @@ class TechStack(models.Model):
     languages = models.ManyToManyField(Language,blank=True)
 
     def __str__(self):
-        if self.users:
-            return str(self.users.get(id=1)) + "'s TechStack"
+        if self.users.all().first():
+            return str(self.users.all().first()) + "'s TechStack"
         else:
-            return str(self.projects.get(id=1)) + "'s TechStack"
+            return str(self.projects.all().first()) + "'s TechStack"
