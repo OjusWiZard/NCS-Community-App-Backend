@@ -9,8 +9,3 @@ from .serializers import UserSerializer
 class NibbliteViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('designation__rank','-year')
     serializer_class = UserSerializer
-
-
-class UnsecureNibbliteViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('designation__rank','-year')
-    serializer_class = UserSerializer
