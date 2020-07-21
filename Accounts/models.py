@@ -59,19 +59,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
 
     nickname = models.CharField(max_length=32)
-    profile_pic = models.ImageField(upload_to='profile_pictures/',null=True)
+    profile_pic = models.ImageField(upload_to='profile_pictures/',null=True,blank=True)
     full_name = models.CharField(max_length=32)
     phone_no = models.CharField(max_length=16)
-    club = models.ForeignKey(Club,on_delete=models.CASCADE,to_field='club')
-    branch = models.ForeignKey(Branch,on_delete=models.CASCADE,to_field='branch_code')
-    year = models.ForeignKey(Year,on_delete=models.CASCADE,to_field='year')
-    session = models.ForeignKey(Session,on_delete=models.CASCADE)
-    designation = models.ForeignKey(Designation,on_delete=models.CASCADE,to_field='designation')
-    profile = models.ManyToManyField(Website,through='Profile')
+    club = models.ForeignKey(Club,on_delete=models.SET_NULL,to_field='club',null=True,blank=True)
+    branch = models.ForeignKey(Branch,on_delete=models.SET_NULL,to_field='branch_code',null=True,blank=True)
+    year = models.ForeignKey(Year,on_delete=models.SET_NULL,null=True,to_field='year')
+    session = models.ForeignKey(Session,on_delete=models.SET_NULL,null=True)
+    designation = models.ForeignKey(Designation,on_delete=models.SET_NULL,to_field='designation',null=True,blank=True)
+    profile = models.ManyToManyField(Website,through='Profile',blank=True)
     techstack = models.ForeignKey(TechStack,on_delete=models.SET_NULL,related_name='users',null=True,blank=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nickname','full_name','phone_no','club','branch','year','session','designation']
+    REQUIRED_FIELDS = ['nickname','full_name','phone_no','year','session']
 
     objects = UserManager()
 

@@ -33,12 +33,12 @@ class Attendance(models.Model):
     time_entered = models.DateTimeField()
 
     def __str__(self):
-        return str(self.attendee) + ' in ' + str(self.lab)
+        return str(self.attendee) + ' was in ' + str(self.lab)
 
 
 class Announcement(models.Model):
-    title = models.CharField(max_length=64)
-    message = models.TextField(max_length=512)
+    title = models.CharField(max_length=50)
+    message = models.TextField(max_length=365)
     announcer = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,related_name='announcements')
     notify_groups = models.ManyToManyField(Group,blank=True)
     notify_users = models.ManyToManyField(User,blank=True)
