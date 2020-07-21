@@ -13,6 +13,10 @@ class Schedule(viewsets.ModelViewSet):
     queryset = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')).order_by(F('start_datetime')+F('duration'))
     serializer_class = ScheduleSerializer
 
+    def get_queryset(self):
+        updated_queryset = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')).order_by(F('start_datetime')+F('duration'))
+        return updated_queryset
+
 
 @permission_classes([IsAuthenticated])
 class markAttendance(viewsets.ViewSet):
