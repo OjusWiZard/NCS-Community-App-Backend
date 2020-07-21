@@ -8,6 +8,7 @@ from django.db.models import F
 from .models import Lab, Attendance, Venue
 from .serializers import ScheduleSerializer
 
+
 @permission_classes([IsAuthenticated])
 class Schedule(viewsets.ModelViewSet):
     queryset = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')).order_by(F('start_datetime')+F('duration'))
@@ -29,20 +30,21 @@ class markAttendance(viewsets.ViewSet):
             return HttpResponse(status=404)
 
         else:
-            latest_lab = Lab.objects.filter(venue=lab_id).last()
-            lab_starting = latest_lab.start_datetime - latest_lab.attendance_offset
-            lab_expiry = latest_lab.start_datetime + latest_lab.duration
+            target_lab = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')).order_by(F('start_datetime')+F('duration')).first()
+            target_lab = Lab.objects.filter(venue=lab_id).last()
+            lab_starting = target_lab.start_datetime - target_lab.attendance_offset
+            lab_expiry = target_lab.start_datetime + target_lab.duration
             current_time = timezone.now()
 
             if lab_starting <= current_time <= lab_expiry :
 
-                if Attendance.objects.filter(attendee=request.user,lab=latest_lab):
+                if Attendance.objects.filter(attendee=request.user,lab=target_lab):
                     # Your attendance is already reported
                     return HttpResponse(status=208)
 
                 else:
                     # Have a nice Lab!
-                    Attendance.objects.create(attendee=request.user,lab=latest_lab,time_entered=current_time)
+                    Attendance.objects.create(attendee=request.user,lab=target_lab,time_entered=current_time)
                     return HttpResponse(status=201)
 
             else:
