@@ -11,27 +11,33 @@ from .serializers import ScheduleSerializer
 
 @permission_classes([IsAuthenticated])
 class Schedule(viewsets.ModelViewSet):
-    queryset = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')).order_by(F('start_datetime')+F('duration'))
+    queryset = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')-timezone.timedelta(days=0)).order_by(F('start_datetime')+F('duration'))
     serializer_class = ScheduleSerializer
 
     def get_queryset(self):
-        updated_queryset = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')).order_by(F('start_datetime')+F('duration'))
+        days_offset = 0
+        if self.request.query_params.get('days'):
+            days_offset = int(self.request.query_params.get('days'))
+        updated_queryset = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')-timezone.timedelta(days=days_offset)).order_by(F('start_datetime')+F('duration'))
         return updated_queryset
 
 
 @permission_classes([IsAuthenticated])
 class markAttendance(viewsets.ViewSet):
     
-    def create(self,request,lab_id):
-        get_object_or_404(Venue,pk=lab_id)
+    def create(self,request,venue_id):
+        get_object_or_404(Venue,pk=venue_id)
 
-        if not Lab.objects.filter(venue=lab_id).last():
+        if not Lab.objects.filter(venue=venue_id).last():
             # No lab exist on this venue
             return HttpResponse(status=404)
 
         else:
-            target_lab = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')).order_by(F('start_datetime')+F('duration')).first()
-            target_lab = Lab.objects.filter(venue=lab_id).last()
+            target_lab = Lab.objects.filter(venue=venue_id,start_datetime__gte=timezone.now()-F('duration')).order_by(F('start_datetime')+F('duration')).first()
+            
+            if not target_lab:
+                return HttpResponse(status=410)
+
             lab_starting = target_lab.start_datetime - target_lab.attendance_offset
             lab_expiry = target_lab.start_datetime + target_lab.duration
             current_time = timezone.now()

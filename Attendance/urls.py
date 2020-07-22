@@ -9,6 +9,6 @@ scheduleRouter = routers.DefaultRouter()
 scheduleRouter.register(r'Schedule', Schedule, basename='schedule')
 
 urlpatterns = [
-    path('<int:lab_id>/', include(attendanceRouter.urls)),
+    path('<int:venue_id>/', include(attendanceRouter.urls)),
     path('', include(scheduleRouter.urls)),
 ]

@@ -39,14 +39,14 @@ class TechStackSerializer(serializers.ModelSerializer):
         fields = ['languages','frontend_techs','backend_techs','app_techs']
 
 
-class TeamSerializer(serializers.ModelSerializer):
+class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['full_name']
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    team = TeamSerializer(many=True)
+    team = PersonSerializer(many=True)
     techstack = TechStackSerializer()
     class Meta:
         model = Project

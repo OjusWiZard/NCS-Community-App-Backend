@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Lab, Venue
-from Projects.serializers import TeamSerializer
+from Projects.serializers import PersonSerializer
 
 
 class VenueSerializer(serializers.ModelSerializer):
@@ -10,8 +10,8 @@ class VenueSerializer(serializers.ModelSerializer):
 
 
 class ScheduleSerializer(serializers.ModelSerializer):
-    attendees = TeamSerializer(many=True)
-    organizer = TeamSerializer()
+    attendees = PersonSerializer(many=True)
+    organizer = PersonSerializer()
     venue = VenueSerializer()
     start_date = serializers.SerializerMethodField('custom_date')
     start_time = serializers.SerializerMethodField('custom_time')
