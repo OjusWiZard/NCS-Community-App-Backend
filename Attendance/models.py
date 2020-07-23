@@ -17,8 +17,8 @@ class Lab(models.Model):
     start_datetime = models.DateTimeField()
     attendance_offset = models.DurationField(default=timezone.timedelta(minutes=5))
     duration = models.DurationField(default=timezone.timedelta(hours=2))
-    topic = models.CharField(max_length=64)
-    additional_info = models.TextField(max_length=512,null=True,blank=True)
+    topic = models.CharField(max_length=25) # Notification Title may overflow beyond 25
+    additional_info = models.TextField(max_length=245,null=True,blank=True) # Notification Body may overflow beyond 245
     venue = models.ForeignKey(Venue,on_delete=models.SET_NULL,null=True)
     organizer = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,related_name='labs_organized')
     attendees = models.ManyToManyField(User,through='Attendance',related_name='labs_attended')
