@@ -63,7 +63,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     full_name = models.CharField(max_length=32)
     phone_no = models.CharField(max_length=16)
     club = models.ForeignKey(Club,on_delete=models.SET_NULL,to_field='club',null=True,blank=True)
-    branch = models.ForeignKey(Branch,on_delete=models.SET_NULL,to_field='branch_code',null=True,blank=True)
+    branch = models.ForeignKey(Branch,on_delete=models.SET_NULL,to_field='branch_code',null=True)
     year = models.ForeignKey(Year,on_delete=models.SET_NULL,null=True,to_field='year')
     session = models.ForeignKey(Session,on_delete=models.SET_NULL,null=True)
     designation = models.ForeignKey(Designation,on_delete=models.SET_NULL,to_field='designation',null=True,blank=True)

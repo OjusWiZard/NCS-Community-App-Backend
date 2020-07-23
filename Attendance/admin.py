@@ -32,6 +32,9 @@ def Announce(AnnouncementAdmin,request,queryset):
 
 class AnnouncementAdmin(admin.ModelAdmin):
     actions = [Announce]
+    list_display = ['title','message','announcer']
+    list_filter = ['notify_groups']
+    search_fields = ['announcer__nickname','announcer__full_name','notify_users__nickname','notify_users__full_name']
 
 
 def Announce_Lab(AnnouncementLab, request, queryset):
@@ -67,11 +70,24 @@ def Announce_Lab(AnnouncementLab, request, queryset):
             AnnouncementLab.message_user(request, result, code )
 
 
-class AnnouncementLab(admin.ModelAdmin):
+class LabAdmin(admin.ModelAdmin):
     actions = [Announce_Lab]
+    list_display = ['topic','start_datetime','duration','venue','organizer']
+    list_filter = ['venue','organizer']
+    list_editable = ['start_datetime','duration','venue','organizer']
+    list_per_page = 5
+    ordering = ['-start_datetime']
+    search_fields = ['topic','organizer__full_name','organizer__nickname']
+
+
+class AttendanceAdmin(admin.ModelAdmin):
+    list_display = ['attendee','lab','time_entered']
+    readonly_fields = ['attendee','lab','time_entered']
+    ordering = ['-time_entered']
+    search_fields = ['attendee__full_name','attendee__nickname','lab__topic']
 
 
 admin.site.register(Announcement, AnnouncementAdmin)
-admin.site.register(Lab, AnnouncementLab)
-admin.site.register(Attendance)
+admin.site.register(Lab, LabAdmin)
+admin.site.register(Attendance, AttendanceAdmin)
 admin.site.register(Venue)
