@@ -2,8 +2,12 @@
 .vscode
 NCSApp/__pycache__/
 Nibblites/__pycache__/
-Nibblites/migrations/__pycache__/
 Accounts/__pycache__/
+Attendance/__pycache__/
 Projects/__pycache__/
+Nibblites/migrations/
+Accounts/migrations/
+Projects/migrations/
+Attendance/migrations/
 static/
 media/

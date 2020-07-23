@@ -10,7 +10,7 @@ from .serializers import ScheduleSerializer
 
 
 @permission_classes([IsAuthenticated])
-class Schedule(viewsets.ModelViewSet):
+class Schedule(viewsets.ReadOnlyModelViewSet):
     queryset = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')-timezone.timedelta(days=0)).order_by(F('start_datetime')+F('duration'))
     serializer_class = ScheduleSerializer
 

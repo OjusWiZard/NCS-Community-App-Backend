@@ -15,6 +15,7 @@ class Project(models.Model):
     scope = models.TextField(max_length=1024,blank=True,null=True)
     team = models.ManyToManyField(User,related_name='projects')
     techstack = models.ForeignKey(TechStack,on_delete=models.SET_NULL,null=True,related_name='projects')
+    show_in_app = models.BooleanField(default=True)
 
     def __str__(self):
         return self.project_name

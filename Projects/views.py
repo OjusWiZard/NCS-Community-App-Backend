@@ -6,6 +6,6 @@ from .serializers import ProjectSerializer
 
 
 @permission_classes([IsAuthenticated])
-class ProjectViewSet(viewsets.ModelViewSet):
-    queryset = Project.objects.all().order_by('-last_modified')
+class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Project.objects.filter(show_in_app=True).order_by('-last_modified')
     serializer_class = ProjectSerializer

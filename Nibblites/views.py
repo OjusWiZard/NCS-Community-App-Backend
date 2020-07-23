@@ -6,6 +6,6 @@ from .serializers import UserSerializer
 
 
 @permission_classes([IsAuthenticated])
-class NibbliteViewSet(viewsets.ModelViewSet):
+class NibbliteViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all().order_by('designation__rank','-year')
     serializer_class = UserSerializer
