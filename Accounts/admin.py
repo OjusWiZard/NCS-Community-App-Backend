@@ -1,11 +1,56 @@
-from django.contrib import admin
-from .models import User, Website, Profile
+from django.contrib import admin, messages
+from django.contrib.auth.models import Group
+from .models import User, Website, Profile, Designation
 
 
 admin.site.site_header = 'NCS Community Administration'
 
 
-class UserAdmin(admin.ModelAdmin):
+def make_Nibblite( UserAdmin, request, queryset ):
+
+    if not request.user.is_superuser:
+        UserAdmin.message_user( request, 'You are NOT a SuperUser', messages.ERROR )
+        
+    else:
+        nibblites = Group.objects.get(name='Nibblite')
+        member = Designation.objects.get(designation='Member')
+        for user in queryset:
+            nibblites.user_set.add(user)
+            user.designation = member
+            user.save()
+        UserAdmin.message_user( request, 'Congratulations to the new Nibblites!!! 🥳', messages.SUCCESS )
+
+
+def make_Moderator( UserAdmin, request, queryset ):
+
+    if not request.user.is_superuser:
+        UserAdmin.message_user( request, 'You are NOT a SuperUser', messages.ERROR )
+
+    else:
+        moderator = Group.objects.get(name='Moderator')
+        for user in queryset:
+            moderator.user_set.add(user)
+            user.is_staff = True
+            user.save()
+        UserAdmin.message_user( request, 'New Moderators added', messages.SUCCESS )
+
+
+def make_Announcer( UserAdmin, request, queryset ):
+
+    if not request.user.is_superuser:
+        UserAdmin.message_user( request, 'You are NOT a SuperUser', messages.ERROR )
+
+    else:
+        announcer = Group.objects.get(name='Announcer')
+        for user in queryset:
+            announcer.user_set.add(user)
+            user.is_staff = True
+            user.save()
+        UserAdmin.message_user( request, 'New Announcers added', messages.SUCCESS )
+
+
+class UserAdmin(admin.ModelAdmin):  
+    actions = [make_Nibblite, make_Announcer, make_Moderator]
     exclude = ['password', 'last_login', 'date_joined']
     list_display = ['nickname','designation','year','club','branch','email','phone_no']
     list_filter = ['groups','year','club','branch']

@@ -50,4 +50,4 @@ class ProjectSerializer(serializers.ModelSerializer):
     techstack = TechStackSerializer()
     class Meta:
         model = Project
-        fields = ['project_name','project_description','team','techstack','current_status','github','deployed_at','icon','background','started_year','last_modified','scope']
+        fields = ['project_name','project_description','team','techstack','github','deployed_at','icon','background']

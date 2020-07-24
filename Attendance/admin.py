@@ -85,6 +85,12 @@ class AttendanceAdmin(admin.ModelAdmin):
     readonly_fields = ['attendee','lab','time_entered']
     ordering = ['-time_entered']
     search_fields = ['attendee__full_name','attendee__nickname','lab__topic']
+    
+    def has_add_permission(request, objects=None):
+        return False
+
+    def has_delete_permission(self, request, objects=None):
+        return False
 
 
 admin.site.register(Announcement, AnnouncementAdmin)

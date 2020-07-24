@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import ProjectSerializer
 
 
-@permission_classes([IsAuthenticated])
 class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Project.objects.filter(show_in_app=True).order_by('-last_modified')
+    permission_classes = [IsAuthenticated]
+    queryset = Project.objects.filter(show_in_app=True)
     serializer_class = ProjectSerializer

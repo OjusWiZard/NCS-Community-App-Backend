@@ -7,10 +7,11 @@ from django.utils import timezone
 from django.db.models import F
 from .models import Lab, Attendance, Venue
 from .serializers import ScheduleSerializer
+from Nibblites.permissions import IsNibblite
 
 
-@permission_classes([IsAuthenticated])
 class Schedule(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [IsAuthenticated,IsNibblite]
     queryset = Lab.objects.filter(start_datetime__gte=timezone.now()-F('duration')-timezone.timedelta(days=0)).order_by(F('start_datetime')+F('duration'))
     serializer_class = ScheduleSerializer
 
@@ -22,8 +23,8 @@ class Schedule(viewsets.ReadOnlyModelViewSet):
         return updated_queryset
 
 
-@permission_classes([IsAuthenticated])
 class markAttendance(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated,IsNibblite]
     
     def create(self,request,venue_id):
         get_object_or_404(Venue,pk=venue_id)
