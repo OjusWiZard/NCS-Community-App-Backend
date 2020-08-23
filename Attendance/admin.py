@@ -1,6 +1,7 @@
 from django.contrib import admin, messages
 from django.contrib.auth.models import Group
 from django.db.models import Exists, Subquery, Q
+from django.utils import timezone
 from fcm_django.models import FCMDevice
 from .models import Announcement, Lab, Attendance, Venue
 from Accounts.models import User
@@ -37,6 +38,12 @@ class AnnouncementAdmin(admin.ModelAdmin):
     search_fields = ['announcer__nickname','announcer__full_name','notify_users__nickname','notify_users__full_name']
 
 
+def Duplicate_Lab(AnnouncementLab, request, queryset):
+
+    for lab in queryset:
+        Lab.objects.create(start_datetime=timezone.now(), attendance_offset=lab.attendance_offset, duration=lab.duration, topic=lab.topic, additional_info=lab.additional_info, venue=lab.venue, organizer=lab.organizer)
+
+
 def Announce_Lab(AnnouncementLab, request, queryset):
     
     notifyingUsers = User.objects.all()
@@ -71,12 +78,12 @@ def Announce_Lab(AnnouncementLab, request, queryset):
 
 
 class LabAdmin(admin.ModelAdmin):
-    actions = [Announce_Lab]
+    actions = [Announce_Lab, Duplicate_Lab]
     list_display = ['topic','start_datetime','duration','venue','organizer']
     list_filter = ['venue','organizer']
     list_editable = ['start_datetime','duration','venue','organizer']
     list_per_page = 5
-    ordering = ['-start_datetime']
+    ordering = ['-start_datetime', '-topic']
     search_fields = ['topic','organizer__full_name','organizer__nickname']
 
 
