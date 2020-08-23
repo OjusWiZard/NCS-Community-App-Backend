@@ -11,3 +11,4 @@ Projects/migrations/
 Attendance/migrations/
 static/
 media/
+db.sqlite3
