@@ -46,8 +46,7 @@ def Duplicate_Lab(AnnouncementLab, request, queryset):
 
 def Announce_Lab(AnnouncementLab, request, queryset):
     
-    notifyingUsers = User.objects.all()
-    # notifyingUsers = User.objects.filter( groups='Nibblites', is_active=True )
+    notifyingUsers = User.objects.filter( groups='Nibblites', is_active=True )
     notifyingDevices = FCMDevice.objects.filter( user__in=notifyingUsers )
 
     for lab in queryset:
