@@ -80,10 +80,10 @@ class LabAdmin(admin.ModelAdmin):
     actions = [Announce_Lab, Duplicate_Lab]
     list_display = ['topic','start_datetime','duration','venue','organizer']
     list_filter = ['venue','organizer']
-    list_editable = ['start_datetime','duration','venue','organizer']
     list_per_page = 5
     ordering = ['-start_datetime', '-topic']
-    search_fields = ['topic','organizer__full_name','organizer__nickname']
+    search_fields = ['topic', 'organizer__full_name', 'organizer__nickname']
+    readonly_fields = ['start_datetime', 'duration', 'venue', 'organizer', 'topic', 'attendance_offset']
 
 
 class AttendanceAdmin(admin.ModelAdmin):

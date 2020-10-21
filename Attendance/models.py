@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models import QuerySet
+from django.db.models import F
+from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.contrib.auth.models import Group
 from fcm_django.models import FCMDevice
@@ -22,6 +24,18 @@ class Lab(models.Model):
     venue = models.ForeignKey(Venue,on_delete=models.SET_NULL,null=True)
     organizer = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,related_name='labs_organized')
     attendees = models.ManyToManyField(User,through='Attendance',related_name='labs_attended')
+
+    def clean(self):
+        previous_lab = Lab.objects.filter(start_datetime__lt=self.start_datetime).order_by(F('start_datetime') + F('duration')).last()
+        next_lab = Lab.objects.filter(start_datetime__gt=self.start_datetime).order_by(F('start_datetime') + F('duration')).first()
+        if (previous_lab is not None):
+            if (previous_lab.start_datetime + previous_lab.duration > self.start_datetime and self.venue == previous_lab.venue):
+                print('The Lab is overlapping with the previous Lab: '+str(previous_lab)+'!')
+                raise ValidationError('The Lab is overlapping with the previous Lab: '+str(previous_lab)+'!')
+        if (next_lab is not None):
+            if (self.start_datetime + self.duration > next_lab.start_datetime and self.venue == previous_lab.venue):
+                print('The Lab is overlapping with the next Lab: '+str(next_lab)+'!')
+                raise ValidationError('The Lab is overlapping with the next Lab: '+str(next_lab)+'!')
 
     def __str__(self):
         return self.topic
