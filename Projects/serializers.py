@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from rest_framework import serializers
 from .models import Project
 from Accounts.models import User
@@ -50,4 +51,10 @@ class ProjectSerializer(serializers.ModelSerializer):
     techstack = TechStackSerializer()
     class Meta:
         model = Project
-        fields = ['project_name','project_description','team','techstack','github','deployed_at','icon','background']
+        fields = ['project_name', 'project_description', 'team', 'techstack', 'github', 'deployed_at', 'icon', 'background']
+        
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ['name',]
