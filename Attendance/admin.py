@@ -46,7 +46,7 @@ def Duplicate_Lab(AnnouncementLab, request, queryset):
 
 def Announce_Lab(AnnouncementLab, request, queryset):
     
-    notifyingUsers = User.objects.filter( groups='Nibblites', is_active=True )
+    notifyingUsers = User.objects.filter(groups__name='Nibblite', is_active=True)
     notifyingDevices = FCMDevice.objects.filter( user__in=notifyingUsers )
 
     for lab in queryset:
@@ -83,7 +83,6 @@ class LabAdmin(admin.ModelAdmin):
     list_per_page = 5
     ordering = ['-start_datetime', '-topic']
     search_fields = ['topic', 'organizer__full_name', 'organizer__nickname']
-    readonly_fields = ['start_datetime', 'duration', 'venue', 'organizer', 'topic', 'attendance_offset']
 
 
 class AttendanceAdmin(admin.ModelAdmin):
