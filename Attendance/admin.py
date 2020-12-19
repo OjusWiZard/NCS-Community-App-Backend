@@ -17,8 +17,6 @@ def Announce(AnnouncementAdmin,request,queryset):
 
         response = notifyingDevices.send_message( title=announcement.title, body=announcement.message )
         if response:
-            successes = response['success']
-            failures = response['failure']
             result = 'Announcement Title: ' + announcement.title + ', Successfully Sent: ' + str(response['success']) + ', Failed to Send: ' + str(response['failure'])
 
             if not response['failure']:
@@ -62,8 +60,6 @@ def Announce_Lab(AnnouncementLab, request, queryset):
         response = notifyingDevices.send_message( title=lab_title, body=lab_description )
 
         if response:
-            successes = response['success']
-            failures = response['failure']
             result = 'Announcement Title: ' + lab.topic + ', Successfully Sent: ' + str(response['success']) + ', Failed to Send: ' + str(response['failure'])
 
             if not response['failure']:

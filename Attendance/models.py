@@ -37,6 +37,10 @@ class Lab(models.Model):
                 print('The Lab is overlapping with the next Lab: '+str(next_lab)+'!')
                 raise ValidationError('The Lab is overlapping with the next Lab: '+str(next_lab)+'!')
 
+    def save(self, *args, **kwargs):
+        super(Lab, self).save(*args, **kwargs)
+        Attendance.objects.create(attendee=self.organizer,lab=self,time_entered=self.start_datetime)
+
     def __str__(self):
         return self.topic
 
